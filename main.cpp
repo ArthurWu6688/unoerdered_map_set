@@ -1,5 +1,6 @@
 #include "unordered_set.h"
 #include "unordered_map.h"
+#include "bitset.h"
 
 void test_unordered_set() {
     wyp::unordered_set<int> us;
@@ -36,15 +37,42 @@ void test_unordered_map() {
         m[e]++;
     }
 
-    for (auto e: m) {
-        std::cout << e.first << ":" << e.second << " ";
+//    for (auto e: m) {
+//        std::cout << e.first << ":" << e.second << " ";
+//    }
+//    std::cout << std::endl;
+
+    wyp::unordered_map<std::string, int>::iterator it = m.begin();
+    while (it != m.end()) {
+        std::cout << (*it).first << ":" << (*it).second << " ";
+        ++it;
     }
     std::cout << std::endl;
+}
+
+void test_bitset() {
+    wyp::bitset<0xffffffff> bs;
+    bs.set(10);
+    bs.set(20);
+    bs.set(3000);
+    std::cout << bs.test(10) << std::endl;
+    std::cout << bs.test(20) << std::endl;
+    std::cout << bs.test(3000) << std::endl;
+    std::cout << bs.test(666) << std::endl;
+    std::cout << bs.test(777) << std::endl;
+    bs.reset(20);
+    bs.set(666);
+    std::cout << bs.test(10) << std::endl;
+    std::cout << bs.test(20) << std::endl;
+    std::cout << bs.test(3000) << std::endl;
+    std::cout << bs.test(666) << std::endl;
+    std::cout << bs.test(777) << std::endl;
 }
 
 int main() {
     test_unordered_set();
     test_unordered_map();
+    test_bitset();
 
     return 0;
 }
